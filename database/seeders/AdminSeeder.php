@@ -21,15 +21,7 @@ class AdminSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
                 'remember_token' => null,
-            ]
-        );
-        User::firstOrCreate(
-            ['email' => 'users@example.com'], // เงื่อนไขตรวจซ้ำ
-            [
-                'name' => 'ลูกค้า',
-                'email_verified_at' => now(),
-                'password' => Hash::make('123456789'),
-                'remember_token' => null,
+                'user_level' => 3
             ]
         );
     }
