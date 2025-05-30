@@ -16,19 +16,12 @@ class Check_admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() &&  Auth::user()->user_level == 2) {
-            return redirect('/admin');
-        }
-        elseif (Auth::user() &&  Auth::user()->user_level == 3){
-            return redirect('/admin');
-        }
-        elseif (Auth::user() &&  Auth::user()->user_level == 4){
-            return redirect('/admin');
-        }
-        elseif (Auth::user() &&  Auth::user()->user_level == 1){
+        if (auth()->check()) {
             return $next($request);
-        }
-        else {
+        } else {
+            auth()->logout();
+            session()->invalidate();
+            session()->regenerateToken();
             return redirect('/');
         }
     }

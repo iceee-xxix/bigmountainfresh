@@ -70,50 +70,50 @@
                     <div class="nav">
 
                         @if (auth()->user()->user_level == 2)
-                            <div class="sb-sidenav-menu-heading">ผู้ดูแลระบบระดับมหาลัย</div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="bi bi-pencil-square"></i></div>
-                                การจัดการข้อมูล
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                                data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link"
-                                        href="{{ route('addholidayIndex') }}">กำหนดปฏิทินวันหยุดประจำปี</a>
-                                    <a class="nav-link" href="{{ route('managetimeIndex') }}">กำหนดเวลาเข้า - ออกงาน</a>
-                                    <a class="nav-link" href="{{ route('manageuserIndex') }}">จัดการข้อมูลบุคลากร</a>
-                                    <a class="nav-link" href="{{ route('OrganizationIndex') }}">จัดการหน่วยงาน</a>
-                                    <a class="nav-link" href="{{ route('manageadminIndex') }}">การจัดการแอดมิน</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link" href="{{ route('reportIndex') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-calendar-week"></i></div>
-                                สรุปรายงานการทำงาน
-                            </a>
-                            <a class="nav-link" href="{{ route('worktimerecordingIndex') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
-                                ตรวจสอบการลงเวลา
-                            </a>
-                            <a class="nav-link" href="{{ route('work_leave_index') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-calendar-minus"></i></div>
-                                กำหนดวันลาบุคลากร
-                            </a>
+                        <div class="sb-sidenav-menu-heading">ผู้ดูแลระบบระดับมหาลัย</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="bi bi-pencil-square"></i></div>
+                            การจัดการข้อมูล
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link"
+                                    href="{{ route('addholidayIndex') }}">กำหนดปฏิทินวันหยุดประจำปี</a>
+                                <a class="nav-link" href="{{ route('managetimeIndex') }}">กำหนดเวลาเข้า - ออกงาน</a>
+                                <a class="nav-link" href="{{ route('manageuserIndex') }}">จัดการข้อมูลบุคลากร</a>
+                                <a class="nav-link" href="{{ route('OrganizationIndex') }}">จัดการหน่วยงาน</a>
+                                <a class="nav-link" href="{{ route('manageadminIndex') }}">การจัดการแอดมิน</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link" href="{{ route('reportIndex') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-calendar-week"></i></div>
+                            สรุปรายงานการทำงาน
+                        </a>
+                        <a class="nav-link" href="{{ route('worktimerecordingIndex') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
+                            ตรวจสอบการลงเวลา
+                        </a>
+                        <a class="nav-link" href="{{ route('work_leave_index') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-calendar-minus"></i></div>
+                            กำหนดวันลาบุคลากร
+                        </a>
                         @elseif(auth()->user()->user_level == 3)
-                            <div class="sb-sidenav-menu-heading">ผู้ดูแลระบบระดับหน่วยงาน</div>
-                            <a class="nav-link" href="{{ route('Org_reportIndex') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-calendar-week"></i></div>
-                                สรุปรายงานการทำงาน
-                            </a>
-                            <a class="nav-link" href="{{ route('worktimerecordingIndex') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
-                                ตรวจสอบการลงเวลา
-                            </a>
-                            <a class="nav-link" href="{{ route('work_leave_index') }}">
-                                <div class="sb-nav-link-icon"><i class="bi bi-calendar-minus"></i></div>
-                                กำหนดวันลาบุคลากร
-                            </a>
+                        <div class="sb-sidenav-menu-heading">ผู้ดูแลระบบระดับหน่วยงาน</div>
+                        <a class="nav-link" href="{{ route('Org_reportIndex') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-calendar-week"></i></div>
+                            สรุปรายงานการทำงาน
+                        </a>
+                        <a class="nav-link" href="{{ route('worktimerecordingIndex') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
+                            ตรวจสอบการลงเวลา
+                        </a>
+                        <a class="nav-link" href="{{ route('work_leave_index') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-calendar-minus"></i></div>
+                            กำหนดวันลาบุคลากร
+                        </a>
                         @endif
 
                         <div class="sb-sidenav-menu-heading">สำหรับผู้ใช้ทั่วไป</div>
@@ -124,6 +124,10 @@
                         <a class="nav-link" href="{{ route('userWorkhistory') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-clock-history"></i></div>
                             ประวัติการทำงาน
+                        </a>
+                        <a class="nav-link" href="{{ route('work_leave_index') }}">
+                            <div class="sb-nav-link-icon"><i class="bi bi-journal-text"></i></div>
+                            คำขอลา
                         </a>
                         <a class="nav-link" href="{{ route('userHoliday') }}">
                             <div class="sb-nav-link-icon"><i class="bi bi-calendar2-week"></i></div>
@@ -148,7 +152,7 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted mx-auto">Copyright &copy; My Website 2024</div>
+                        <div class="text-muted mx-auto">© 2025 , So Smart Solution</div>
                     </div>
                 </div>
             </footer>

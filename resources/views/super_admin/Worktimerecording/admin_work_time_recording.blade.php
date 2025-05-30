@@ -48,7 +48,7 @@
                             <td> {{ $worktime->User->user_department }} </td>
                             <td class="date-cell"> {{ $worktime->attemp_date }} </td>
                             <td> {{ $worktime->attemp_time }} </td>
-                            <td class ="text-center"> {!! $worktime->InOutStatus !!} </td>
+                            <td class ="text-center"> {!! $worktime->attemp_describe !!} </td>
                             <th>
                                 @if (isset($worktime->attemp_late_time))
                                     {{ $worktime->attemp_late_time }} นาที

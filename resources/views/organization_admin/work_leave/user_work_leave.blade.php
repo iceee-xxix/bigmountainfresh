@@ -28,7 +28,6 @@
     })
 </script>
 @endif
-
 <?php
 function DateTimeThai($strDate)
 {
@@ -41,7 +40,6 @@ function DateTimeThai($strDate)
     return "$strDay $strMonthThai $strYear";
 }
 ?>
-
 <title>หน้าหลัก</title>
 <div class="container mt-2">
     <h2 class="text-center">กำหนดวันลาบุคลากร</h2><br>
@@ -52,10 +50,10 @@ function DateTimeThai($strDate)
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                <div class="flex-row-reverse mt-4 text-end">
+                <div class="flex-row-reverse mt-2 text-end">
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                         data-bs-target="#resignationModal">
-                        เพิ่มการลาของบุคลากร
+                        ยื่นคำขอลา
                     </button>
                 </div>
 
@@ -91,19 +89,14 @@ function DateTimeThai($strDate)
                                     <td> {{ $row_history->attemp_describe }} </td>
                                     <th> {{ ($row_history->status == 1) ? 'รออนุมัติ' : 'อนุมัติ'}} </th>
                                     <td>
-                                        <div class="d-flex justify-content-center">
-                                            @if($row_history->status == 1)
-                                            <button type="button" data-id="{{$row_history->id}}"
-                                                data-text="คุณต้องการอนุมัติกการลาของ {{$row_history->user->name}} ในวันที่ {{ DateTimeThai($row_history->attemp_date) }} ใช่หรือไม่?"
-                                                class="btn btn-success btn-sm approve mx-1">
-                                                อนุมัติ
-                                            </button>
-                                            @endif
-                                            <button type="button" data-id="{{$row_history->id}}"
+                                        <div class="text-center">
+                                            @if(\Carbon\Carbon::parse($row_history->attemp_date)->diffInDays(\Carbon\Carbon::now(), false) <= 2)
+                                                <button type="button" data-id="{{$row_history->id}}"
                                                 data-text="คุณต้องการลบการลาของ {{$row_history->user->name}} ในวันที่ {{ DateTimeThai($row_history->attemp_date) }} ใช่หรือไม่?"
                                                 class="btn btn-danger btn-sm cancel">
                                                 ยกเลิก
-                                            </button>
+                                                </button>
+                                                @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -139,16 +132,17 @@ function DateTimeThai($strDate)
                                         </option>
                                         @endforeach
                                         </select> --}}
-                                        <select class="form-control select2" style="width: 100%; " aria-label="Default select example" name="work_leave_user" id="work_leave_user">
+                                        <select class="form-control select2" style="width: 100%; " aria-label="Default select example" name="work_leave_user" id="work_leave_user" disabled>
                                             <option value="none" selected disabled hidden>เลือกพนักงาน</option>
                                             @foreach ($user_selection as $user_select)
-                                            <option value="{{ $user_select->id }}">
+                                            <option value="{{ $user_select->id }}" {{($user_select->id == auth()->user()->id) ? 'selected' : ''}}>
                                                 {{ $user_select->name }} :
                                                 {{ $user_select->organization->organization_name }} :
                                                 {{ $user_select->user_department }}
                                             </option>
                                             @endforeach
                                         </select>
+                                        <input type="hidden" name="work_leave_user" id="work_leave_user" value="{{auth()->user()->id}}">
 
                                         <script>
                                             $('.select2').select2({
@@ -198,8 +192,7 @@ function DateTimeThai($strDate)
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">ปิด</button>
                                         <button type="submit" class="btn btn-primary">บันทึก</button>
-                                    </div>
-                                    <br>
+                                    </div><br>
                                 </form>
                             </div>
                         </div>
@@ -302,44 +295,6 @@ function DateTimeThai($strDate)
                     $.ajax({
                         type: "post",
                         url: "{{route('work_leave_cancel')}}",
-                        data: {
-                            id: id,
-                            value: result.value
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            if (response.status == true) {
-                                Swal.fire(response.message, "", "success");
-                                setTimeout(function() {
-                                    location.reload();
-                                }, 500);
-                            } else {
-                                Swal.fire(response.message, "", "error");
-                            }
-                        }
-                    });
-                }
-            });
-        });
-        $(document).on('click', '.approve', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            var text = $(this).data('text');
-            Swal.fire({
-                title: '<h5>' + text + '</h5>',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: "ยืนยัน",
-                cancelButtonText: "ยกเลิก",
-                showLoaderOnConfirm: true,
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "post",
-                        url: "{{route('work_leave_approve')}}",
                         data: {
                             id: id,
                             value: result.value
