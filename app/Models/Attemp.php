@@ -42,9 +42,9 @@ class Attemp extends Model
     public function getInOutStatusAttribute(){
         switch ( $this->attemp_in_out) {
             case 1:
-                return "<span>เข้า</span>";
+                return "<span>เข้างาน</span>";
             case 2:
-                return "<span>ออก</span>";
+                return "<span>ออกงาน</span>";
             case 0:
                 return "<span>ลา</span>";
             default:
